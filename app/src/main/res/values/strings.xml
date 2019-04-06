@@ -3,4 +3,38 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string-array name="cities">
+        <item>All</item>
+        <item>Hồ Chí Minh</item>
+    </string-array>
+
+    <string-array name="skills">
+        <item>All</item>
+        <item>Speaking</item>
+        <item>Writing</item>
+        <item>Reading</item>
+        <item>Listenting</item>
+    </string-array>
+    <string-array name="districts">
+        <item>All</item>
+        <item>Quận 1</item>
+        <item>Quận 2</item>
+        <item>Quận 3</item>
+        <item>Quận 4</item>
+        <item>Quận 5</item>
+        <item>Quận 6</item>
+        <item>Quận 7</item>
+        <item>Quận 8</item>
+        <item>Quận 9</item>
+        <item>Quận 10</item>
+        <item>Quận 11</item>
+        <item>Quận 12</item>
+        <item>Quận Tân Bình</item>
+        <item>Quận Bình Thạnh</item>
+        <item>Quận Gò Vấp</item>
+        <item>Quận Phú Nhuận</item>
+        <item>Quận Tân Bình</item>
+        <item>Quận Tân Phú</item>
+        <item>Quận Thủ Đức</item>
+    </string-array>
 </resources>
