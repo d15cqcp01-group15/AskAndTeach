@@ -7,11 +7,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.askandteach.fragment.ClassFragment;
+import com.example.askandteach.fragment.CourseFragment;
 import com.example.askandteach.fragment.FragmentFactory;
-import com.example.askandteach.fragment.GroupFragment;
+import com.example.askandteach.fragment.EventFragment;
 import com.example.askandteach.fragment.ProfileFragment;
 import com.example.askandteach.fragment.TopicFragment;
 
@@ -28,12 +27,9 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_class:
-                    Toast.makeText(getApplicationContext(),"class", Toast.LENGTH_SHORT).show();
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_group:
-                    Toast.makeText(getApplicationContext(),"group", Toast.LENGTH_SHORT).show();
-
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_topic:
@@ -59,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
     }
 
     private void addTabs(){
-        pagerAdapter.addFrag(new ClassFragment());
-        pagerAdapter.addFrag(new GroupFragment());
+        pagerAdapter.addFrag(new CourseFragment());
+        pagerAdapter.addFrag(new EventFragment());
         pagerAdapter.addFrag(new TopicFragment());
         pagerAdapter.addFrag(new ProfileFragment());
         viewPager.setAdapter(pagerAdapter);
