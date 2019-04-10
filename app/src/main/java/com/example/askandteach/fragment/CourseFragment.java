@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.askandteach.ItemClickListener;
@@ -18,11 +20,14 @@ import com.example.askandteach.R;
 import com.example.askandteach.adapter.CoursesAdapter;
 import com.example.askandteach.courseDetail.CourseDetailActivity;
 import com.example.askandteach.createCourse.CreateCourseActivity;
+import com.example.askandteach.fragment.adapter.CustomSpinnerAdapter;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.retrofit.APIInterface;
 import com.example.askandteach.retrofit.RetrofitInstance;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +35,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CourseFragment extends FragmentFactory {
+public class CourseFragment extends FragmentFactory implements OnClickListener {
+
+    private TextView tvCity;
+    private Spinner city;
+
+    private TextView tvDistrict;
+    private Spinner district;
+
+    private TextView tvSkill;
+    private Spinner skill;
 
     private RecyclerView recyclerView;
     private CoursesAdapter mAdapter;
@@ -57,23 +71,6 @@ public class CourseFragment extends FragmentFactory {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class, container, false);
-        Spinner city = (Spinner) view.findViewById(R.id.cbCCity);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.cities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        city.setAdapter(adapter);
-
-        Spinner district = (Spinner) view.findViewById(R.id.cbCDistrict);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
-                R.array.districts, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        district.setAdapter(adapter1);
-
-        Spinner skill = (Spinner) view.findViewById(R.id.cbCSkills);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),
-                R.array.skills, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        skill.setAdapter(adapter2);
 
         return view;
     }
@@ -81,6 +78,49 @@ public class CourseFragment extends FragmentFactory {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        tvCity= view.findViewById(R.id.tvCity);
+        city = (Spinner) view.findViewById(R.id.cbCCity);
+        List<String> cities = Arrays.asList(getContext().getResources().getStringArray(R.array.cities));
+        tvCity.setText(cities.get(0));
+        CustomSpinnerAdapter adapterCities = new CustomSpinnerAdapter(getActivity(), cities, new CustomSpinnerAdapter.ISpinnerCallback(){
+            @Override
+            public void onItemClicked(String text) {
+                hideSpinner(city);
+                tvCity.setText(text);
+            }
+        });
+
+        city.setAdapter(adapterCities);
+
+        tvDistrict= view.findViewById(R.id.tvDistrict);
+        district = (Spinner) view.findViewById(R.id.cbCDistrict);
+        List<String> districts = Arrays.asList(getContext().getResources().getStringArray(R.array.districts));
+        tvDistrict.setText(districts.get(0));
+        CustomSpinnerAdapter adapterDistrict = new CustomSpinnerAdapter(getActivity(), cities, new CustomSpinnerAdapter.ISpinnerCallback(){
+            @Override
+            public void onItemClicked(String text) {
+                hideSpinner(district);
+                tvDistrict.setText(text);
+            }
+        });
+        district.setAdapter(adapterCities);
+
+        tvSkill= view.findViewById(R.id.tvSkill);
+        skill = (Spinner) view.findViewById(R.id.cbCSkills);
+        List<String> skills = Arrays.asList(getContext().getResources().getStringArray(R.array.skills));
+        tvSkill.setText(skills.get(0));
+        CustomSpinnerAdapter skillAdapter = new CustomSpinnerAdapter(getActivity(), cities, new CustomSpinnerAdapter.ISpinnerCallback(){
+            @Override
+            public void onItemClicked(String text) {
+                hideSpinner(skill);
+                tvSkill.setText(text);
+            }
+        });
+        skill.setAdapter(adapterCities);
+
+        initListener();
+
         recyclerView = (RecyclerView) view.findViewById(R.id.classRecycleView);
         mAdapter = new CoursesAdapter(courses);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -117,5 +157,26 @@ public class CourseFragment extends FragmentFactory {
                 CreateCourseActivity.start(getContext());
             }
         });
+    }
+
+    private void initListener() {
+        tvCity.setOnClickListener(this);
+    }
+
+    private void hideSpinner(Spinner sp){
+        try {
+            Method method = Spinner.class.getDeclaredMethod("onDetachedFromWindow");
+            method.setAccessible(true);
+            method.invoke(sp);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == tvCity){
+            city.performClick();
+        }
     }
 }
