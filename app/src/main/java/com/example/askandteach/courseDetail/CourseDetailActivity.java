@@ -23,6 +23,12 @@ public class CourseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
 
+        initial();
+        addEvents();
+        addControls();
+    }
+
+    private void initial(){
         tvName = findViewById(R.id.tvName);
         price = findViewById(R.id.tvPriceClassDetail);
         time = findViewById(R.id.tvTimeClassDetail);
@@ -40,7 +46,6 @@ public class CourseDetailActivity extends AppCompatActivity {
         district.setText(course.getDistrict());
         city.setText(course.getCity());
         description.setText(course.getDescription());
-        addEvents();
     }
 
     private void addControls(){

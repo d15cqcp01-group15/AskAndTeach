@@ -42,7 +42,6 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
     private String uptime="2013:04:00";
     private int price= 5000;
     private String description="day la chi tiet ne";
-
     private Button btnCreate;
 
 
@@ -50,9 +49,21 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_course);
+        initials();
+        addControls();
+        addEvents();
 
+    }
+
+    private void initials(){
         tvCity =  (TextView) findViewById(R.id.tvCity);
         city = (Spinner) findViewById(R.id.cbCCity);
+        btnCreate = (Button) findViewById(R.id.btnCreate);
+        tvDistrict = (TextView) findViewById(R.id.tvDistrict);
+        district = (Spinner) findViewById(R.id.cbCDistrict);
+    }
+
+    private void addControls(){
         List<String> cities = Arrays.asList(getApplication().getResources().getStringArray(R.array.cities));
         tvCity.setText(cities.get(0));
         CustomSpinnerAdapter adapterCities = new CustomSpinnerAdapter(this, cities, new CustomSpinnerAdapter.ISpinnerCallback() {
@@ -65,9 +76,6 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
 
         city.setAdapter(adapterCities);
 
-        btnCreate = (Button) findViewById(R.id.btnCreate);
-        tvDistrict = (TextView) findViewById(R.id.tvDistrict);
-        district = (Spinner) findViewById(R.id.cbCDistrict);
         List<String> districts = Arrays.asList(getApplication().getResources().getStringArray(R.array.districts));
         tvDistrict.setText(districts.get(0));
         CustomSpinnerAdapter adapterDistrict = new CustomSpinnerAdapter(this, districts, new CustomSpinnerAdapter.ISpinnerCallback() {
@@ -79,8 +87,10 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
         });
         district.setAdapter(adapterDistrict);
 
-        initListener();
 
+    }
+
+    private void addEvents(){
         btnCreate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +98,8 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
             }
         });
 
-        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
+        tvCity.setOnClickListener(this);
+        tvDistrict.setOnClickListener(this);
     }
 
     private void hideSpinner(Spinner sp){
@@ -111,16 +122,6 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
         }
     }
 
-    private void initListener() {
-        tvCity.setOnClickListener(this);
-        tvDistrict.setOnClickListener(this);
-    }
-
-    public static void start(Context context){
-        Intent intent = new Intent(context, CreateCourseActivity.class);
-        context.startActivity(intent);
-    }
-
     public void onCreateCourse(View view) {
         CreateCourse  createCourse = new CreateCourse(tvCity.getText().toString(), tvDistrict.getText().toString(), address, skill, price, description, uptime);
         APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
@@ -139,5 +140,10 @@ public class CreateCourseActivity extends AppCompatActivity implements OnClickLi
             }
         });
 
+    }
+
+    public static void start(Context context){
+        Intent intent = new Intent(context, CreateCourseActivity.class);
+        context.startActivity(intent);
     }
 }
