@@ -59,7 +59,6 @@ public class EventFragment extends FragmentFactory {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_group, container, false);
         addControls(view);
-        addEvents();
         return view;
     }
 
@@ -88,6 +87,8 @@ public class EventFragment extends FragmentFactory {
 
             }
         });
+
+        addEvents();
     }
 
     private void addControls(View view){

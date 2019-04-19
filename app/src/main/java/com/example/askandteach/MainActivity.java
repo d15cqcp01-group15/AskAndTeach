@@ -53,6 +53,15 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         bottomNavigation = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        addControls();
+        addEvents();
+    }
+
+    private void addEvents(){
+
+    }
+
+    private void addControls(){
         addTabs();
     }
 
