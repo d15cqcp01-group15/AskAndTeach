@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventDetail.EventDetail"></activity>
+        <activity android:name=".Authentication"></activity>
+        <activity android:name=".EventDetail.EventDetail" />
         <activity android:name=".createCourse.CreateCourseActivity" />
         <activity android:name=".courseDetail.CourseDetailActivity" />
         <activity

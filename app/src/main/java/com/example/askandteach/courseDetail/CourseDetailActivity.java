@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.askandteach.R;
 import com.example.askandteach.models.Course;
@@ -12,6 +16,7 @@ import com.example.askandteach.models.Course;
 public class CourseDetailActivity extends AppCompatActivity {
 
     TextView tvName, price, time, skill, district, city, description;
+    Button btnRegisterCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         district = findViewById(R.id.tvDistrictClassDetail);
         city = findViewById(R.id.tvCityClassDetail);
         description = findViewById(R.id.tvDescriptionClassDetail);
+        btnRegisterCourse = findViewById(R.id.btnRegisterCourse);
 
         Course course = (Course) getIntent().getSerializableExtra("COURSE");
         price.setText(course.getPrice().toString());
@@ -34,7 +40,25 @@ public class CourseDetailActivity extends AppCompatActivity {
         district.setText(course.getDistrict());
         city.setText(course.getCity());
         description.setText(course.getDescription());
+        addEvents();
     }
+
+    private void addControls(){
+
+    }
+
+    private void addEvents(){
+        btnRegisterCourse.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO check authentication
+                //Send request register course
+                Toast.makeText(getApplicationContext(), "111111", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+
 
     public static void startCourseDetail(Context context, Course course){
         Intent intent = new Intent(context, CourseDetailActivity.class);

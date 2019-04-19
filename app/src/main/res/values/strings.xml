@@ -37,4 +37,7 @@
         <item>Quận Tân Phú</item>
         <item>Quận Thủ Đức</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
