@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
     private BottomNavigationView bottomNavigation;
     private ViewPagerAdapter pagerAdapter;
 
+    private static String tokenValue="";
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -66,6 +68,14 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    public static void setTokenValue(String tokenValue){
+        MainActivity.tokenValue = tokenValue;
+    }
+
+    public static String getTokenValue(){
+        return tokenValue;
     }
 
 }

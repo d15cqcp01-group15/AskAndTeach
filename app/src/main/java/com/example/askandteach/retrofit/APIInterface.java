@@ -1,13 +1,18 @@
 package com.example.askandteach.retrofit;
 
 import com.example.askandteach.models.Course;
+import com.example.askandteach.models.CreateCourse;
 import com.example.askandteach.models.Event;
+import com.example.askandteach.models.SignInModel;
+import com.example.askandteach.models.SignInresponse;
 import com.example.askandteach.models.Topic;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 
 public interface APIInterface {
@@ -21,9 +26,12 @@ public interface APIInterface {
     @GET("/topics")
     Call<List<Topic>> doTopic();
 
-//    @POST("/api/users")
-//    Call<User> createUser(@Body User user);
-//
+    @POST("/courses")
+    Call<CreateCourse> createCourse(@Body CreateCourse createCourse);
+
+    @POST("/auth/login")
+    Call<SignInresponse> signIn(@Body SignInModel info);
+
 //    @GET("/api/users?")
 //    Call<UserList> doGetUserList(@Query("page") String page);
 //
