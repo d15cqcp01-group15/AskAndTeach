@@ -41,14 +41,14 @@ import retrofit2.Response;
 
 public class CourseFragment extends FragmentFactory implements OnClickListener {
 
-    private TextView tvCity;
-    private Spinner city;
+        private TextView tvCity;
+        private Spinner city;
 
-    private TextView tvDistrict;
-    private Spinner district;
+        private TextView tvDistrict;
+        private Spinner district;
 
-    private TextView tvSkill;
-    private Spinner skill;
+        private TextView tvSkill;
+        private Spinner skill;
 
     private Button btnCreateCourse;
 
