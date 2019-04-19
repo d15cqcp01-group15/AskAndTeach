@@ -62,37 +62,44 @@ public class SignIn extends FragmentFactory {
         btnSignin = (Button) view.findViewById(R.id.btnSignIn);
         email = (EditText) view.findViewById(R.id.edtEmail);
         password = (EditText) view.findViewById(R.id.edtMatkhau);
-
-        btnSignin.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
-
-                SignInModel info = new SignInModel(email.getText().toString(), password.getText().toString());
-                Call<SignInresponse> call = service.signIn(info);
-
-                call.enqueue(new Callback<SignInresponse>() {
-                    @Override
-                    public void onResponse(Call<SignInresponse> call, Response<SignInresponse> response) {
-                        MainActivity.setTokenValue(response.body().getToken());
-                        getActivity().onBackPressed();
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<SignInresponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "111", Toast.LENGTH_SHORT);
-                    }
-                });
-            }
-        });
-
+        addControls();
+        addEvents();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void addEvents(){
+        btnSignin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
+
+            SignInModel info = new SignInModel(email.getText().toString(), password.getText().toString());
+            Call<SignInresponse> call = service.signIn(info);
+
+            call.enqueue(new Callback<SignInresponse>() {
+                @Override
+                public void onResponse(Call<SignInresponse> call, Response<SignInresponse> response) {
+                    MainActivity.setTokenValue(response.body().getToken());
+                    getActivity().onBackPressed();
+
+                }
+
+                @Override
+                public void onFailure(Call<SignInresponse> call, Throwable t) {
+                    Toast.makeText(getActivity(), "111", Toast.LENGTH_SHORT);
+                }
+            });
+            }
+        });
+    }
+
+    private void addControls(){
 
     }
+
 }
