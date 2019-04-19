@@ -3,6 +3,7 @@ package com.example.askandteach.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,27 +57,8 @@ public class EventFragment extends FragmentFactory {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_group, container, false);
-        Spinner city = (Spinner) view.findViewById(R.id.cbECity);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.cities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        city.setAdapter(adapter);
-
-        Spinner district = (Spinner) view.findViewById(R.id.cbEDistrict);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
-                R.array.districts, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        district.setAdapter(adapter1);
-
-        Spinner skill = (Spinner) view.findViewById(R.id.cbESkills);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),
-                R.array.skills, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        skill.setAdapter(adapter2);
-
+        addControls(view);
         return view;
     }
 
@@ -88,13 +70,6 @@ public class EventFragment extends FragmentFactory {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
-
-        mAdapter.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                EventDetail.start(getActivity(), events.get(position));
-            }
-        });
 
         APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
         Call<List<Event>> call = service.doGetEvents();
@@ -112,5 +87,38 @@ public class EventFragment extends FragmentFactory {
 
             }
         });
+
+        addEvents();
     }
+
+    private void addControls(View view){
+        // Inflate the layout for this fragment
+        Spinner city = (Spinner) view.findViewById(R.id.cbECity);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.cities, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        city.setAdapter(adapter);
+
+        Spinner district = (Spinner) view.findViewById(R.id.cbEDistrict);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
+                R.array.districts, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        district.setAdapter(adapter1);
+
+        Spinner skill = (Spinner) view.findViewById(R.id.cbESkills);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),
+                R.array.skills, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        skill.setAdapter(adapter2);
+    }
+
+    private void addEvents(){
+        mAdapter.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                EventDetail.start(getActivity(), events.get(position));
+            }
+        });
+    }
+
 }

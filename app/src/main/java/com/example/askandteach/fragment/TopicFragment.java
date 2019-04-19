@@ -69,10 +69,8 @@ public class TopicFragment extends FragmentFactory {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.topicRecycleView);
         mAdapter = new TopicAdapter(topics);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
+        addControls();
+        addEvents();
 
         APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
         Call<List<Topic>> call = service.doTopic();
@@ -91,4 +89,15 @@ public class TopicFragment extends FragmentFactory {
             }
         });
     }
+
+    private void addEvents(){
+
+    }
+
+    private void addControls(){
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdapter);
+    }
+
 }

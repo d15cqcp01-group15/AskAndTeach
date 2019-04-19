@@ -77,8 +77,8 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class, container, false);
-        setControls(view);
-        setEvents();
+        addControls(view);
+        addEvents();
         return view;
     }
 
@@ -88,10 +88,47 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
 
     }
 
-    private void initListener() {
+    private void addEvents() {
         tvCity.setOnClickListener(this);
         tvDistrict.setOnClickListener(this);
         tvSkill.setOnClickListener(this);
+
+        mAdapter.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                CourseDetailActivity.startCourseDetail(getActivity(), courses.get(position));
+            }
+        });
+
+        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
+        Call<List<Course>> call = service.doGetCourses();
+
+        call.enqueue(new Callback<List<Course>>() {
+            @Override
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                courses.clear();
+                courses.addAll(response.body());
+                mAdapter.notifyDataSetChanged();
+                Toast.makeText(getActivity(), courses.size()+"111", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onFailure(Call<List<Course>> call, Throwable t) {
+                Toast.makeText(getActivity(), courses.size()+"111", Toast.LENGTH_SHORT);
+            }
+        });
+
+        btnCreateCourse.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.getTokenValue() == ""){
+                    Authentication.start(getContext());
+                }
+                else{
+                    CreateCourseActivity.start(getContext());
+                }
+            }
+        });
     }
 
     private void hideSpinner(Spinner sp){
@@ -117,7 +154,7 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         }
     }
 
-    public void setControls(View view){
+    public void addControls(View view){
         btnCreateCourse = view.findViewById(R.id.btnTaoClass);
         tvCity= view.findViewById(R.id.tvCity);
         city = (Spinner) view.findViewById(R.id.cbCCity);
@@ -158,53 +195,11 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
             }
         });
         skill.setAdapter(skillAdapter);
-
-        initListener();
-
         recyclerView = (RecyclerView) view.findViewById(R.id.classRecycleView);
         mAdapter = new CoursesAdapter(courses);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
-    }
-
-    public void setEvents(){
-        mAdapter.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onClick(int position) {
-                CourseDetailActivity.startCourseDetail(getActivity(), courses.get(position));
-            }
-        });
-
-        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
-        Call<List<Course>> call = service.doGetCourses();
-
-        call.enqueue(new Callback<List<Course>>() {
-            @Override
-            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
-                courses.clear();
-                courses.addAll(response.body());
-                mAdapter.notifyDataSetChanged();
-                Toast.makeText(getActivity(), courses.size()+"111", Toast.LENGTH_SHORT);
-            }
-
-            @Override
-            public void onFailure(Call<List<Course>> call, Throwable t) {
-                Toast.makeText(getActivity(), courses.size()+"111", Toast.LENGTH_SHORT);
-            }
-        });
-
-        btnCreateCourse.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MainActivity.getTokenValue() == ""){
-                    Authentication.start(getContext());
-                }
-                else{
-                    CreateCourseActivity.start(getContext());
-                }
-            }
-        });
     }
 
 }
