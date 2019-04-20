@@ -1,5 +1,7 @@
 package com.example.askandteach;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         addControls();
         addEvents();
+
+        SharedPreferences sharedPref = getSharedPreferences("userdefault", Context.MODE_PRIVATE);
+        tokenValue = sharedPref.getString("token_value", "");
     }
 
     private void addEvents(){

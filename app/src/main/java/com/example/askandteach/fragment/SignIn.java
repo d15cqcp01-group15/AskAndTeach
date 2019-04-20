@@ -1,5 +1,7 @@
 package com.example.askandteach.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.support.annotation.NonNull;
@@ -84,7 +86,12 @@ public class SignIn extends FragmentFactory {
             call.enqueue(new Callback<SignInresponse>() {
                 @Override
                 public void onResponse(Call<SignInresponse> call, Response<SignInresponse> response) {
-                    MainActivity.setTokenValue(response.body().getToken());
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences("userdefault", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    String token_value = response.body().getToken();
+                    editor.putString("token_value", token_value);
+                    editor.commit();
+                    MainActivity.setTokenValue(token_value);
                     getActivity().onBackPressed();
 
                 }
