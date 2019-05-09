@@ -81,7 +81,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Course cl = courses.get(position);
         holder.name.setText(cl.getUser().getUsername());
-        holder.price.setText(String.valueOf(cl.getPrice()));
+        holder.price.setText(String.valueOf(cl.getPrice()) + " (đ)");
         holder.time.setText(cl.getUptime());
         holder.skill.setText(cl.getSkill());
         holder.district.setText(cl.getDistrict());
