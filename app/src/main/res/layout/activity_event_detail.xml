@@ -19,31 +19,31 @@ tools:context=".EventDetail.EventDetail">
     android:layout_height="wrap_content"
     android:text="TextView" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_weight="3"
-    android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Người Tạo: " />
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txtCreator"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Người Tạo: " />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtCreator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -63,7 +63,7 @@ tools:context=".EventDetail.EventDetail">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -83,7 +83,7 @@ tools:context=".EventDetail.EventDetail">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -103,7 +103,7 @@ tools:context=".EventDetail.EventDetail">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -123,7 +123,7 @@ tools:context=".EventDetail.EventDetail">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:paddingBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -140,9 +140,9 @@ tools:context=".EventDetail.EventDetail">
             android:text="" />
     </LinearLayout>
 
-<Button
-    android:id="@+id/button3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Button" />
+    <Button
+        android:id="@+id/btnRegisterEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký event" />
 </LinearLayout>

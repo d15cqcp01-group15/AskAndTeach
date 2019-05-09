@@ -3,26 +3,20 @@ package com.example.askandteach.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.askandteach.EventDetail.EventDetail;
 import com.example.askandteach.ItemClickListener;
 import com.example.askandteach.R;
-import com.example.askandteach.adapter.CoursesAdapter;
 import com.example.askandteach.adapter.EventsAdapter;
-import com.example.askandteach.courseDetail.CourseDetailActivity;
-import com.example.askandteach.createCourse.CreateCourseActivity;
-import com.example.askandteach.fragment.adapter.CustomSpinnerAdapter;
+import com.example.askandteach.adapter.CustomSpinnerAdapter;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.Event;
 import com.example.askandteach.retrofit.APIInterface;
@@ -46,13 +40,10 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     private TextView tvDistrict;
     private Spinner district;
 
-    private TextView tvSkill;
-    private Spinner skill;
-
-
     private RecyclerView recyclerView;
     private EventsAdapter mAdapter;
-    List<Event> events = new ArrayList<>();
+    List<Event> originalEvents = new ArrayList<>();
+    List<Event> filterEvents = new ArrayList<>();
 
     public EventFragment() {
         // Required empty public constructor
@@ -71,7 +62,7 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_group, container, false);
+        View view = inflater.inflate(R.layout.fragment_event, container, false);
         addControls(view);
         return view;
     }
@@ -86,8 +77,9 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
         call.enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                events.clear();
-                events.addAll(response.body());
+                originalEvents.clear();
+                originalEvents.addAll(response.body());
+                filterEvents.addAll(originalEvents);
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -110,6 +102,7 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
             public void onItemClicked(String text) {
                 hideSpinner(city);
                 tvCity.setText(text);
+                filterCity(text);
             }
         });
 
@@ -124,25 +117,13 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
             public void onItemClicked(String text) {
                 hideSpinner(district);
                 tvDistrict.setText(text);
+                filterDistrict(text);
             }
         });
         district.setAdapter(adapterDistrict);
 
-        tvSkill= view.findViewById(R.id.tvSkill);
-        skill = (Spinner) view.findViewById(R.id.cbCSkills);
-        List<String> skills = Arrays.asList(getContext().getResources().getStringArray(R.array.skills));
-        tvSkill.setText(skills.get(0));
-        CustomSpinnerAdapter skillAdapter = new CustomSpinnerAdapter(getActivity(), skills, new CustomSpinnerAdapter.ISpinnerCallback(){
-            @Override
-            public void onItemClicked(String text) {
-                hideSpinner(skill);
-                tvSkill.setText(text);
-            }
-        });
-        skill.setAdapter(skillAdapter);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.eventRecycleView);
-        mAdapter = new EventsAdapter(events);
+        mAdapter = new EventsAdapter(filterEvents);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
@@ -153,12 +134,11 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     private void addEvents(){
         tvCity.setOnClickListener(this);
         tvDistrict.setOnClickListener(this);
-        tvSkill.setOnClickListener(this);
 
         mAdapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(int position) {
-                EventDetail.start(getActivity(), events.get(position));
+                EventDetail.start(getActivity(), originalEvents.get(position));
             }
         });
     }
@@ -181,9 +161,32 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
         else if (v == tvDistrict){
             district.performClick();
         }
-        else if (v == tvSkill){
-            skill.performClick();
+    }
+
+    private void filterCity(String filter){
+        filterEvents.clear();
+        for(Event e : originalEvents){
+            if((e.getCity().equalsIgnoreCase(filter) || filter.equalsIgnoreCase("all")) &&
+                    (e.getDistrict().equalsIgnoreCase(tvDistrict.getText().toString()) ||  tvDistrict.getText().toString().equalsIgnoreCase("all")))
+            {
+                filterEvents.add(e);
+            }
         }
+
+        mAdapter.notifyDataSetChanged();
+    }
+
+    private void filterDistrict(String filter){
+        filterEvents.clear();
+        for(Event e : originalEvents){
+            if((e.getDistrict().equalsIgnoreCase(filter) || filter.equalsIgnoreCase("all"))&&
+                    (e.getCity().equalsIgnoreCase(tvCity.getText().toString()) || tvCity.getText().toString().equalsIgnoreCase("all")))
+            {
+                filterEvents.add(e);
+            }
+        }
+
+        mAdapter.notifyDataSetChanged();
     }
 
 }
