@@ -1,6 +1,7 @@
 package com.example.askandteach.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.ItemClickListener;
 import com.example.askandteach.R;
 import com.example.askandteach.models.Course;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +82,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
         holder.skill.setText(cl.getSkill());
         holder.district.setText(cl.getDistrict());
         holder.city = cl.getCity();
-        holder.avatar.setImageResource(R.drawable.avatar);
+        new AsyncTaskLoadImage(holder.avatar).execute(cl.getCoverImage());
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +95,5 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     public int getItemCount() {
         return this.courses.size();
     }
-
 
 }
