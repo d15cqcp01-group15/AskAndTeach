@@ -33,13 +33,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Giáo viên: " />
+                    android:text="Giáo viên: "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""></TextView>
+                    android:text=""
+                    android:textColor="@android:color/holo_blue_dark"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -52,7 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Học : " />
+                    android:text="Học : "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvPriceClassDetail"
@@ -73,7 +76,7 @@
                     android:paddingBottom="5dp"
 
                     android:text="Kỹ Năng: "
-                    />
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvSkillClassDetail"
@@ -93,8 +96,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Thời : "
-                    />
+                    android:text="Thời gian : "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvTimeClassDetail"
@@ -115,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:text="Thành Phố: "
-                    />
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvCityClassDetail"
@@ -136,7 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Quận: " />
+                    android:text="Quận: "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvDistrictClassDetail"
@@ -155,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:text="Chi tiết: "
-                   />
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/tvDescriptionClassDetail"
@@ -173,7 +177,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Số lượng học sinh:" />
+                    android:text="Học sinh đã đăng ký: " />
 
                 <TextView
                     android:id="@+id/txtNumberStudent"
