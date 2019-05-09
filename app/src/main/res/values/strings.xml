@@ -5,7 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string-array name="cities">
         <item>All</item>
-        <item>Hồ Chí Minh</item>
+        <item>TP Hồ Chí Minh</item>
     </string-array>
 
     <string-array name="skills">
