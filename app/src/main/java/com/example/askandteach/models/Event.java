@@ -37,6 +37,14 @@ public class Event implements Serializable {
     @Expose
     private User user;
 
+    @SerializedName("open_time")
+    @Expose
+    private Long open_time;
+
+    @SerializedName("description")
+    @Expose
+    private String description;
+
     public Integer getId() {
         return id;
     }
@@ -109,4 +117,20 @@ public class Event implements Serializable {
         this.user = user;
     }
 
+
+    public Long getOpen_time() {
+        return open_time;
+    }
+
+    public void setOpen_time(Long open_time) {
+        this.open_time = open_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

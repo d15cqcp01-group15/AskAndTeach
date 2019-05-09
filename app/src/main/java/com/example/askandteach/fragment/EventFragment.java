@@ -123,7 +123,7 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
         district.setAdapter(adapterDistrict);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.eventRecycleView);
-        mAdapter = new EventsAdapter(filterEvents);
+        mAdapter = new EventsAdapter(getActivity(), filterEvents);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);

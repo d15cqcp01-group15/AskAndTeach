@@ -13,12 +13,13 @@ import com.example.askandteach.R;
 import com.example.askandteach.createCourse.CreateCourseActivity;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.Event;
+import com.example.askandteach.utils;
 
 import java.io.Serializable;
 
 public class EventDetail extends AppCompatActivity {
 
-    TextView tvCreator, txtAddress, txtTime, txtJoined, txtPrice, txtDescripton;
+    TextView tvCreator, txtAddress, txtTime, txtJoined, txtPrice, txtDescripton, txtTopicname;
     Button btnRegisterEvent;
     String event_id;
 
@@ -36,20 +37,24 @@ public class EventDetail extends AppCompatActivity {
     }
 
     private void addControls(){
-        tvCreator = findViewById(R.id.tvName);
-        txtAddress = findViewById(R.id.tvPriceClassDetail);
-        txtTime = findViewById(R.id.tvTimeClassDetail);
-        txtJoined = findViewById(R.id.tvSkillClassDetail);
-        txtPrice = findViewById(R.id.tvDistrictClassDetail);
-        txtDescripton = findViewById(R.id.tvCityClassDetail);
+        tvCreator = findViewById(R.id.txtCreator);
+        txtTopicname = findViewById(R.id.txtTopicName);
+        txtAddress = findViewById(R.id.txtAddress);
+        txtTime = findViewById(R.id.txtTime);
+        txtJoined = findViewById(R.id.txtJoined);
+        txtPrice = findViewById(R.id.txtPrice);
+        txtDescripton = findViewById(R.id.txtDescription);
+        btnRegisterEvent = findViewById(R.id.btnRegisterEvent);
 
         Event e = (Event) getIntent().getSerializableExtra("EVENT");
 
         event_id = e.getId().toString();
+        txtTopicname.setText(e.getTitle());
+        tvCreator.setText(e.getUser().getUsername());
         txtAddress.setText(e.getAddress().toString());
-        txtTime.setText(e.getUptime());
-        txtDescripton.setText(e.getUptime());
-        txtJoined.setText(e.getAmountStudent());
+        txtTime.setText(utils.timestampToDatestring(e.getOpen_time()));
+        txtDescripton.setText(e.getDescription());
+        txtJoined.setText(e.getAmountStudent().toString());
         txtPrice.setText(e.getPrice().toString());
     }
 
