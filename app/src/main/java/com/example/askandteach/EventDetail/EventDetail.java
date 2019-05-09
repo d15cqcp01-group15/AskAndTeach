@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.example.askandteach.R;
 import com.example.askandteach.createCourse.CreateCourseActivity;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.Event;
+import com.example.askandteach.profile.ViewProfileActivity;
 import com.example.askandteach.utils;
 
 import java.io.Serializable;
@@ -46,16 +49,23 @@ public class EventDetail extends AppCompatActivity {
         txtDescripton = findViewById(R.id.txtDescription);
         btnRegisterEvent = findViewById(R.id.btnRegisterEvent);
 
-        Event e = (Event) getIntent().getSerializableExtra("EVENT");
+        final Event ev = (Event) getIntent().getSerializableExtra("EVENT");
 
-        event_id = e.getId().toString();
-        txtTopicname.setText(e.getTitle());
-        tvCreator.setText(e.getUser().getUsername());
-        txtAddress.setText(e.getAddress().toString());
-        txtTime.setText(utils.timestampToDatestring(e.getOpen_time()));
-        txtDescripton.setText(e.getDescription());
-        txtJoined.setText(e.getAmountStudent().toString());
-        txtPrice.setText(e.getPrice().toString());
+        tvCreator.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewProfileActivity.start(getParent(), ev.getUser().getId());
+            }
+        });
+
+        event_id = ev.getId().toString();
+        txtTopicname.setText(ev.getTitle());
+        tvCreator.setText(ev.getUser().getUsername());
+        txtAddress.setText(ev.getAddress().toString());
+        txtTime.setText(utils.timestampToDatestring(ev.getOpen_time()));
+        txtDescripton.setText(ev.getDescription());
+        txtJoined.setText(ev.getAmountStudent().toString());
+        txtPrice.setText(ev.getPrice().toString());
     }
 
 }
