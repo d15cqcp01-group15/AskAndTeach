@@ -1,5 +1,6 @@
 package com.example.askandteach.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.ItemClickListener;
 import com.example.askandteach.R;
 import com.example.askandteach.models.Course;
+import com.example.askandteach.profile.ViewProfileActivity;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -27,6 +29,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     private List<Course> courses;
     private ItemClickListener callback;
     private ItemClickListener callbackJoin;
+    private Activity mActivity;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -60,8 +63,10 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     }
 
 
-    public CoursesAdapter(List<Course> courses) {
+    public CoursesAdapter(Activity activity, List<Course> courses) {
         this.courses = courses;
+
+        this.mActivity = activity;
     }
 
 
@@ -75,9 +80,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Course cl = courses.get(position);
+        final Course cl = courses.get(position);
         holder.name.setText(cl.getUser().getUsername());
-        holder.price.setText(cl.getPrice().toString());
+        holder.price.setText(String.valueOf(cl.getPrice()) + " (đ)");
         holder.time.setText(cl.getUptime());
         holder.skill.setText(cl.getSkill());
         holder.district.setText(cl.getDistrict());
@@ -87,6 +92,13 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 callback.onClick(position);
+            }
+        });
+
+        holder.name.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewProfileActivity.start(mActivity, cl.getUser().getId());
             }
         });
     }

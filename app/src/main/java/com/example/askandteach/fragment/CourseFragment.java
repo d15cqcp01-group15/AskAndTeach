@@ -101,7 +101,7 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         mAdapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(int position) {
-                CourseDetailActivity.startCourseDetail(getActivity(), originalCourses.get(position));
+                CourseDetailActivity.startCourseDetail(getActivity(), originalCourses.get(position).getId());
             }
         });
 
@@ -209,7 +209,7 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         });
         skill.setAdapter(skillAdapter);
         recyclerView = (RecyclerView) view.findViewById(R.id.classRecycleView);
-        mAdapter = new CoursesAdapter(filterCourse);
+        mAdapter = new CoursesAdapter(getActivity(), filterCourse);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
@@ -237,8 +237,6 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
                     (c.getDistrict().equalsIgnoreCase(tvDistrict.getText().toString()) || tvDistrict.getText().toString().equalsIgnoreCase("all")) &&
                     (c.getCity().equalsIgnoreCase(tvCity.getText().toString()) ||tvCity.getText().toString().equalsIgnoreCase("all")))
             {
-
-
                 filterCourse.add(c);
             }
         }
