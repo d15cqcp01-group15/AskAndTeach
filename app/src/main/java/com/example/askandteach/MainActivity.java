@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
 
         SharedPreferences sharedPref = getSharedPreferences("userdefault", Context.MODE_PRIVATE);
         tokenValue = sharedPref.getString("token_value", "");
+        setTokenValue(tokenValue);
     }
 
     private void addEvents(){
