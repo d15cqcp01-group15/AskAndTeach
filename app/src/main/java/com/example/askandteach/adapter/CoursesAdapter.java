@@ -65,6 +65,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
 
     public CoursesAdapter(Activity activity, List<Course> courses) {
         this.courses = courses;
+
         this.mActivity = activity;
     }
 

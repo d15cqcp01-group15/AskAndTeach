@@ -34,14 +34,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="4dp"
-                    android:text="Giáo viên: " />
+                    android:text="Giáo viên: "
+                    android:textColor="@color/title"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:paddingTop="4dp" />
+                    android:paddingTop="4dp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -55,7 +59,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Kỹ năng: " />
+                    android:text="Kỹ năng: "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/txtSkills"
@@ -74,13 +79,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Giá: " />
+                    android:text="Giá: "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/txtPrice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3" />
+                    android:layout_weight="3"
+                    android:textColor="@android:color/holo_orange_light" />
 
 
             </LinearLayout>
@@ -95,7 +102,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thời gian: " />
+                    android:text="Thời gian: "
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/txtTime"
@@ -114,7 +122,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Địa điểm" />
+                    android:text="Địa điểm"
+                    android:textColor="@color/title" />
 
                 <TextView
                     android:id="@+id/txtdistrict"
@@ -128,7 +137,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#333" />
+        android:layout_height="3dp"
+        android:background="#5F5959"
+        android:paddingBottom="5dp" />
 
 </LinearLayout>
