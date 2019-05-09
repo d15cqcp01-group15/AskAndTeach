@@ -1,4 +1,4 @@
-package com.example.askandteach.fragment.adapter;
+package com.example.askandteach.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
