@@ -8,6 +8,11 @@ public class SignInresponse {
 @SerializedName("token")
 @Expose
 private String token;
+
+@SerializedName("user_id")
+@Expose
+private int user_id;
+
 @SerializedName("exp")
 @Expose
 private String exp;
@@ -21,6 +26,14 @@ return token;
 
 public void setToken(String token) {
 this.token = token;
+}
+
+public int getUser_id() {
+    return user_id;
+}
+
+public void setUser_id(int user_id) {
+    this.user_id = user_id;
 }
 
 public String getExp() {

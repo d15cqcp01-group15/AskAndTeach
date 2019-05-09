@@ -17,6 +17,7 @@ import com.example.askandteach.R;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.RegisterCourse;
 import com.example.askandteach.models.RegisterCourseResp;
+import com.example.askandteach.profile.ViewProfileActivity;
 import com.example.askandteach.retrofit.APIInterface;
 import com.example.askandteach.retrofit.RetrofitInstance;
 
@@ -54,7 +55,14 @@ public class CourseDetailActivity extends AppCompatActivity {
         btnRegisterCourse = findViewById(R.id.btnRegisterCourse);
         avatar = findViewById(R.id.ivCourse);
 
-        Course course = (Course) getIntent().getSerializableExtra("COURSE");
+        final Course course = (Course) getIntent().getSerializableExtra("COURSE");
+
+        tvName.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewProfileActivity.start(CourseDetailActivity.this, course.getUser().getId());
+            }
+        });
 
         new AsyncTaskLoadImage(avatar).execute(course.getCoverImage());
         course_id = course.getId().toString();

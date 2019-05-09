@@ -3,6 +3,7 @@ package com.example.askandteach.retrofit;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.CreateCourse;
 import com.example.askandteach.models.Event;
+import com.example.askandteach.models.Profile;
 import com.example.askandteach.models.RegisterCourse;
 import com.example.askandteach.models.RegisterCourseResp;
 import com.example.askandteach.models.SignInModel;
@@ -16,6 +17,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface APIInterface {
@@ -38,9 +41,9 @@ public interface APIInterface {
     @POST("/detail_courses")
     Call<RegisterCourseResp> registerCourse(@Header("Authorization") String token, @Body RegisterCourse register);
 
-//    @GET("/api/users?")
-//    Call<UserList> doGetUserList(@Query("page") String page);
-//
+    @GET("/users/{user_id}")
+    Call<Profile> getProfile(@Path("user_id") int user_id);
+
 //    @FormUrlEncoded
 //    @POST("/api/users?")
 //    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);

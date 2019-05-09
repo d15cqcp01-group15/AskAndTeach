@@ -89,16 +89,18 @@ public class SignIn extends FragmentFactory {
                     SharedPreferences sharedPref = getActivity().getSharedPreferences("userdefault", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     String token_value = response.body().getToken();
+                    int user_id= response.body().getUser_id();
                     editor.putString("token_value", token_value);
+                    editor.putInt("user_id", user_id);
                     editor.commit();
                     MainActivity.setTokenValue(token_value);
+                    MainActivity.setUser_id(user_id);
                     getActivity().onBackPressed();
 
                 }
 
                 @Override
                 public void onFailure(Call<SignInresponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "111", Toast.LENGTH_SHORT);
                 }
             });
             }

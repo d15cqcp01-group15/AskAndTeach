@@ -18,32 +18,50 @@ import com.example.askandteach.fragment.TopicFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentFactory.OnFragmentInteractionListener{
 
+    private static final int COURSE = 0;
+    private static final int EVENT = 1;
+    private static final int TOPIC = 2;
+    private static final int PROFILE = 3;
+
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigation;
     private ViewPagerAdapter pagerAdapter;
 
     private static String tokenValue="";
+    private static int user_id;
+
+    private int currentPage = COURSE;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_class:
-                    viewPager.setCurrentItem(0);
-                    return true;
-                case R.id.navigation_group:
-                    viewPager.setCurrentItem(1);
-                    return true;
-                case R.id.navigation_topic:
-                    viewPager.setCurrentItem(2);
-                    return true;
-                case R.id.navigation_profile:
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_class:
+                viewPager.setCurrentItem(0);
+                currentPage = COURSE;
+                return true;
+            case R.id.navigation_group:
+                viewPager.setCurrentItem(1);
+                currentPage = EVENT;
+                return true;
+            case R.id.navigation_topic:
+                viewPager.setCurrentItem(2);
+                currentPage = TOPIC;
+                return true;
+            case R.id.navigation_profile:
+                if(MainActivity.getUser_id() == 0){
+                    Authentication.start(MainActivity.this);
+                    bottomNavigation.getMenu().getItem(currentPage).setChecked(true);
+                    return false;
+                } else {
                     viewPager.setCurrentItem(3);
+                    currentPage = PROFILE;
                     return true;
-            }
-            return false;
+                }
+        }
+        return false;
         }
     };
 
@@ -60,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
 
         SharedPreferences sharedPref = getSharedPreferences("userdefault", Context.MODE_PRIVATE);
         tokenValue = sharedPref.getString("token_value", "");
+        user_id = sharedPref.getInt("user_id",0);
         setTokenValue(tokenValue);
     }
 
@@ -93,4 +112,11 @@ public class MainActivity extends AppCompatActivity implements FragmentFactory.O
         return tokenValue;
     }
 
+    public static int getUser_id() {
+        return user_id;
+    }
+
+    public static void setUser_id(int user_id) {
+        MainActivity.user_id = user_id;
+    }
 }

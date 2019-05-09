@@ -209,7 +209,7 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         });
         skill.setAdapter(skillAdapter);
         recyclerView = (RecyclerView) view.findViewById(R.id.classRecycleView);
-        mAdapter = new CoursesAdapter(filterCourse);
+        mAdapter = new CoursesAdapter(getActivity(), filterCourse);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
