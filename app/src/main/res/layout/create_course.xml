@@ -123,32 +123,40 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/chkSpeaking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Speaking" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent" >
 
-        <CheckBox
-            android:id="@+id/ckhListening"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Listening" />
+            <RadioButton
+                android:id="@+id/radReading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reading" />
 
-        <CheckBox
-            android:id="@+id/ckhWriting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Writing" />
+            <RadioButton
+                android:id="@+id/radSpeaking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Speaking" />
 
-        <CheckBox
-            android:id="@+id/ckhReading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Reading" />
+            <RadioButton
+                android:id="@+id/radWriting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Writing" />
+
+            <RadioButton
+                android:id="@+id/radListening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Listening" />
+        </RadioGroup>
+
     </LinearLayout>
 
     <TextView
@@ -157,7 +165,7 @@
         android:text="Học Phí" />
 
     <EditText
-        android:id="@+id/edHocPhi"
+        android:id="@+id/edtHocPhi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -170,7 +178,7 @@
         android:text="Chi tiết" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edtChitiet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
