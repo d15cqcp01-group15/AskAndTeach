@@ -9,14 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.askandteach.Authentication;
 import com.example.askandteach.EventDetail.EventDetail;
 import com.example.askandteach.ItemClickListener;
+import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
 import com.example.askandteach.adapter.EventsAdapter;
 import com.example.askandteach.adapter.CustomSpinnerAdapter;
+import com.example.askandteach.createCourse.CreateCourseActivity;
+import com.example.askandteach.createEvent.CreateEventActivity;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.Event;
 import com.example.askandteach.retrofit.APIInterface;
@@ -40,10 +45,12 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     private TextView tvDistrict;
     private Spinner district;
 
+    private Button btnCreateEvent;
     private RecyclerView recyclerView;
     private EventsAdapter mAdapter;
     List<Event> originalEvents = new ArrayList<>();
     List<Event> filterEvents = new ArrayList<>();
+
 
     public EventFragment() {
         // Required empty public constructor
@@ -60,6 +67,13 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadEvents();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event, container, false);
@@ -71,28 +85,12 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.eventRecycleView);
-        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
-        Call<List<Event>> call = service.doGetEvents();
-
-        call.enqueue(new Callback<List<Event>>() {
-            @Override
-            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                originalEvents.clear();
-                originalEvents.addAll(response.body());
-                filterEvents.addAll(originalEvents);
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Event>> call, Throwable t) {
-
-            }
-        });
-
+        loadEvents();
         addEvents();
     }
 
     public void addControls(View view){
+        btnCreateEvent = view.findViewById(R.id.btnCreateEvent);
         tvCity= view.findViewById(R.id.tvCity);
         city = (Spinner) view.findViewById(R.id.cbCCity);
         List<String> cities = Arrays.asList(getContext().getResources().getStringArray(R.array.cities));
@@ -139,6 +137,18 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
             @Override
             public void onClick(int position) {
                 EventDetail.start(getActivity(), originalEvents.get(position));
+            }
+        });
+
+        btnCreateEvent.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.getTokenValue() == ""){
+                    Authentication.start(getContext());
+                }
+                else{
+                    CreateEventActivity.start(getContext());
+                }
             }
         });
     }
@@ -188,5 +198,26 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
 
         mAdapter.notifyDataSetChanged();
     }
+
+    private void loadEvents(){
+        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
+        Call<List<Event>> call = service.doGetEvents();
+        call.enqueue(new Callback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                originalEvents.clear();
+                originalEvents.addAll(response.body());
+                filterEvents.addAll(originalEvents);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 
 }

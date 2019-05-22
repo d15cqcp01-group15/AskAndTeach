@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User {
 
     @SerializedName("id")
     @Expose
@@ -13,6 +13,9 @@ public class User implements Serializable {
     @SerializedName("username")
     @Expose
     private String username;
+    @SerializedName("profile_image")
+    @Expose
+    private String profileImage;
 
     public Integer getId() {
         return id;
@@ -28,6 +31,14 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
 }

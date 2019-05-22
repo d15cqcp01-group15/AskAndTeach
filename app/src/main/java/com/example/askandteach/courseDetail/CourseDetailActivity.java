@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,12 +16,14 @@ import android.widget.Toast;
 import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
+import com.example.askandteach.adapter.RegisterStudentAdapter;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.CourseDetail;
 import com.example.askandteach.models.Profile;
 import com.example.askandteach.models.RegisterCourse;
 import com.example.askandteach.models.RegisterCourseResp;
 import com.example.askandteach.models.StudentList;
+import com.example.askandteach.models.User;
 import com.example.askandteach.profile.ViewProfileActivity;
 import com.example.askandteach.retrofit.APIInterface;
 import com.example.askandteach.retrofit.RetrofitInstance;
@@ -35,7 +39,11 @@ public class CourseDetailActivity extends AppCompatActivity {
 
     TextView tvName, price, time, skill, district, city, description, tvNumberStudent;
     Button btnRegisterCourse;
+    ArrayList<User> registerStudents = new ArrayList<>();
     CourseDetail course;
+
+    RecyclerView recRegisterStudent;
+    RegisterStudentAdapter registerStAdapter;
 
     ImageView avatar;
     private boolean registed = false;
@@ -59,6 +67,14 @@ public class CourseDetailActivity extends AppCompatActivity {
         description = findViewById(R.id.tvDescriptionClassDetail);
         tvNumberStudent = findViewById(R.id.txtNumberStudent);
         btnRegisterCourse = findViewById(R.id.btnRegisterCourse);
+
+        recRegisterStudent = findViewById(R.id.recRegisterStudent);
+        registerStAdapter = new RegisterStudentAdapter(this, this.registerStudents);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recRegisterStudent.setLayoutManager(mLayoutManager);
+        recRegisterStudent.setAdapter(registerStAdapter);
+
+
         avatar = findViewById(R.id.ivCourse);
 
         final int course_id = (int) getIntent().getSerializableExtra("COURSE");
@@ -76,6 +92,13 @@ public class CourseDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ViewProfileActivity.start(CourseDetailActivity.this, course.getUser().getId());
+            }
+        });
+
+        tvNumberStudent.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -98,8 +121,10 @@ public class CourseDetailActivity extends AppCompatActivity {
                     call.enqueue(new Callback<RegisterCourseResp>() {
                         @Override
                         public void onResponse(Call<RegisterCourseResp> call, Response<RegisterCourseResp> response) {
-                            btnRegisterCourse.setText("Huỹ đăng ký");
+                            btnRegisterCourse.setText("Huỷ đăng ký");
+                            Toast.makeText(getApplicationContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                             registed = true;
+                            getCourse(course.getId());
                         }
 
                         @Override
@@ -109,7 +134,7 @@ public class CourseDetailActivity extends AppCompatActivity {
                     });
                 }
                 else{
-                    Call<String> call = service.doUnregisterCourse(MainActivity.getTokenValue(), "course_id: course.getId().toString()");
+                    Call<String> call = service.doUnregisterCourse(MainActivity.getTokenValue(), course.getId().toString());
 
                     call.enqueue(new Callback<String>() {
                         @Override
@@ -117,6 +142,8 @@ public class CourseDetailActivity extends AppCompatActivity {
                             btnRegisterCourse.setText("Đăng ký");
                             registed = false;
                             getCourse(course.getId());
+                            Toast.makeText(getApplicationContext(), "Huỷ đăng ký thành công", Toast.LENGTH_SHORT).show();
+
                         }
 
                         @Override
@@ -148,10 +175,12 @@ public class CourseDetailActivity extends AppCompatActivity {
                 city.setText(course.getCity());
                 description.setText(course.getDescription());
                 tvNumberStudent.setText(course.getAmountStudent().toString());
+                ArrayList<User> studentList = course.getStudentList();
+                registerStudents.clear();
+                registerStudents.addAll(studentList);
+                registerStAdapter.notifyDataSetChanged();
 
-                ArrayList<StudentList> users_info = (ArrayList<StudentList>) course.getStudentList();
-
-                for(StudentList user: users_info){
+                for(User user: registerStudents){
                     if(user.getId() == MainActivity.getUser_id()){
                         registed = true;
                     }

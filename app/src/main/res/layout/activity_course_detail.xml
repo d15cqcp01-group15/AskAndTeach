@@ -186,6 +186,11 @@
                     android:text="" />
             </LinearLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recRegisterStudent"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
             <Button
                 android:id="@+id/btnRegisterCourse"
                 android:layout_width="wrap_content"

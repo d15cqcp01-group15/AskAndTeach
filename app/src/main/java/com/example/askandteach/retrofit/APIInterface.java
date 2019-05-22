@@ -3,6 +3,7 @@ package com.example.askandteach.retrofit;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.CourseDetail;
 import com.example.askandteach.models.CreateCourse;
+import com.example.askandteach.models.CreateEvent;
 import com.example.askandteach.models.Event;
 import com.example.askandteach.models.Profile;
 import com.example.askandteach.models.RegisterCourse;
@@ -37,6 +38,9 @@ public interface APIInterface {
     @POST("/courses")
     Call<CreateCourse> createCourse(@Header("Authorization") String token, @Body CreateCourse createCourse);
 
+    @POST("/events")
+    Call<CreateEvent> createEvent(@Header("Authorization") String token, @Body CreateEvent createEvent);
+
     @POST("/auth/login")
     Call<SignInresponse> signIn(@Body SignInModel info);
 
@@ -46,7 +50,7 @@ public interface APIInterface {
     @GET("/users/{user_id}")
     Call<Profile> getProfile(@Path("user_id") int user_id);
 
-    @DELETE("/unregister_course}")
+    @DELETE("/unregister_course")
     Call<String> doUnregisterCourse(@Header("Authorization") String token,@Query("course_id") String course_id);
 
     @GET("/courses/{course_id}")

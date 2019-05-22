@@ -104,6 +104,12 @@
             android:layout_height="1dp"
             android:background="#333" />
 
+        <Button
+            android:id="@+id/btnCreateEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tạo sự kiện" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/eventRecycleView"
             android:layout_width="match_parent"
