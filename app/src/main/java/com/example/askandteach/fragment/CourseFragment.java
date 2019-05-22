@@ -136,10 +136,19 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 originalCourses.clear();
-                originalCourses.addAll(response.body());
-                filterCourse.clear();
-                filterCourse.addAll(originalCourses);
-                mAdapter.notifyDataSetChanged();
+
+                if (response.body() !=null) {
+                    for (Course course : response.body()) {
+                        if (course.getStatus().equals("openning")) {
+                            originalCourses.add(course);
+
+                        }
+                    }
+
+                    filterCourse.clear();
+                    filterCourse.addAll(originalCourses);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

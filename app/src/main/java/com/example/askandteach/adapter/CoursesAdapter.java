@@ -28,12 +28,11 @@ import java.util.List;
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHolder> {
     private List<Course> courses;
     private ItemClickListener callback;
-    private ItemClickListener callbackJoin;
     private Activity mActivity;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, price, time, skill, district;
+        public TextView name, price, time, skill, district, numberRegister;
         public String city;
         public ImageView avatar;
         public Button btnJoin;
@@ -47,6 +46,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
             skill = (TextView) view.findViewById(R.id.txtSkills);
             district = (TextView) view.findViewById(R.id.txtdistrict);
             avatar = (ImageView) view.findViewById(R.id.avatar);
+            numberRegister = view.findViewById(R.id.txtNumberRegister);
         }
 
     }
@@ -55,11 +55,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     public void setItemClickListener(ItemClickListener itemClickListener)
     {
         this.callback = itemClickListener;
-    }
-
-    public void setJoinClickListenner(ItemClickListener itemClickListener)
-    {
-        this.callbackJoin = itemClickListener;
     }
 
 
@@ -87,6 +82,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
         holder.skill.setText(cl.getSkill());
         holder.district.setText(cl.getDistrict());
         holder.city = cl.getCity();
+        holder.numberRegister.setText(String.valueOf(cl.getAmountStudent()));
         new AsyncTaskLoadImage(holder.avatar).execute(cl.getCoverImage());
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
