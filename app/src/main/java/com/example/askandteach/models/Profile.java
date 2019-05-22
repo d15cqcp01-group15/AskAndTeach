@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Profile {
 
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -34,6 +33,12 @@ public class Profile {
     @SerializedName("self_introduce")
     @Expose
     private String selfIntroduce;
+    @SerializedName("phone_number")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("profile_image")
+    @Expose
+    private String profileImage;
 
     public Integer getId() {
         return id;
@@ -105,6 +110,22 @@ public class Profile {
 
     public void setSelfIntroduce(String selfIntroduce) {
         this.selfIntroduce = selfIntroduce;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
 }

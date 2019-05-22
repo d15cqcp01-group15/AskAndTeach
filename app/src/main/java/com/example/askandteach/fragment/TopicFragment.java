@@ -1,7 +1,5 @@
 package com.example.askandteach.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,13 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.askandteach.EventDetail.EventDetail;
-import com.example.askandteach.ItemClickListener;
 import com.example.askandteach.R;
-import com.example.askandteach.adapter.EventsAdapter;
 import com.example.askandteach.adapter.TopicAdapter;
-import com.example.askandteach.fragment.adapter.CustomSpinnerAdapter;
-import com.example.askandteach.models.Event;
+import com.example.askandteach.adapter.CustomSpinnerAdapter;
 import com.example.askandteach.models.Topic;
 import com.example.askandteach.retrofit.APIInterface;
 import com.example.askandteach.retrofit.RetrofitInstance;

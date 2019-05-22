@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -34,6 +36,14 @@ public class Event {
     @SerializedName("user")
     @Expose
     private User user;
+
+    @SerializedName("open_time")
+    @Expose
+    private Long open_time;
+
+    @SerializedName("description")
+    @Expose
+    private String description;
 
     public Integer getId() {
         return id;
@@ -107,4 +117,20 @@ public class Event {
         this.user = user;
     }
 
+
+    public Long getOpen_time() {
+        return open_time;
+    }
+
+    public void setOpen_time(Long open_time) {
+        this.open_time = open_time;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

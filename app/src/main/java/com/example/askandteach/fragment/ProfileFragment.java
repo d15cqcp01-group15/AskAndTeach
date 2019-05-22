@@ -13,12 +13,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.Authentication;
 import com.example.askandteach.EventDetail.EventDetail;
-import com.example.askandteach.ItemClickListener;
+import com.example.askandteach.
+        ItemClickListener;
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
 import com.example.askandteach.adapter.EventsAdapter;
@@ -44,6 +47,7 @@ public class ProfileFragment extends FragmentFactory {
 
 
     private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse;
+    private ImageView avatar;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -77,22 +81,22 @@ public class ProfileFragment extends FragmentFactory {
         txtBirthDay = view.findViewById(R.id.txtBirthDay);
         txtNumberStudent = view.findViewById(R.id.txtNumberStudent);
         txtNumberCourse = view.findViewById(R.id.txtNumberCourse);
+        avatar = view.findViewById(R.id.avatar);
     }
 
 
     private void addEvents(){
-        if (profile != null) {
-            logout.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SharedPreferences preferences = getContext().getSharedPreferences("userdefault", Context.MODE_PRIVATE);
-                    preferences.edit().remove("token_value").commit();
-                    preferences.edit().remove("user_id").commit();
-                    MainActivity.setTokenValue("");
-                    getActivity().onBackPressed();
-                }
-            });
-        }
+        logout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences = getContext().getSharedPreferences("userdefault", Context.MODE_PRIVATE);
+                preferences.edit().remove("token_value").commit();
+                preferences.edit().remove("user_id").commit();
+                MainActivity.setTokenValue("");
+                MainActivity.setUser_id(0);
+                getActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit();
+            }
+        });
     }
 
     private void getProfile(){
@@ -110,6 +114,7 @@ public class ProfileFragment extends FragmentFactory {
                 txtBirthDay.setText(profile.getBirthday());
                 txtNumberStudent.setText(profile.getJoinedEvent().toString());
                 txtNumberCourse.setText(profile.getOpenedClass().toString());
+                new AsyncTaskLoadImage(avatar).execute(profile.getProfileImage());
             }
 
             @Override

@@ -1,5 +1,6 @@
 package com.example.askandteach.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -26,7 +27,7 @@ private String skill;
 private String description;
 @SerializedName("student_list")
 @Expose
-private List<StudentList> studentList = null;
+private ArrayList<User> registerStudents = null;
 @SerializedName("amount_student")
 @Expose
 private Integer amountStudent;
@@ -102,12 +103,12 @@ public void setDescription(String description) {
 this.description = description;
 }
 
-public List<StudentList> getStudentList() {
-return studentList;
+public ArrayList<User> getStudentList() {
+return registerStudents;
 }
 
-public void setStudentList(List<StudentList> studentList) {
-this.studentList = studentList;
+public void setStudentList(ArrayList<User> registerStudents) {
+this.registerStudents = registerStudents;
 }
 
 public Integer getAmountStudent() {

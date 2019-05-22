@@ -7,61 +7,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tên: " />
+            android:text="Tên: "
+            android:textColor="@color/title" />
 
         <TextView
             android:id="@+id/txtEName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Đã Đăng ký:" />
-
-        <TextView
-            android:id="@+id/txtEJoined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingRight="@dimen/activity_horizontal_margin" />
+            android:layout_weight="3" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="6"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Địa điểm: " />
-
-        <TextView
-            android:id="@+id/txtEDistrict"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4" />
-
-        <Button
-            android:id="@+id/button2"
+            android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="+" />
+            android:text="Đã Đăng ký:"
+            android:textColor="@color/title" />
+
+        <TextView
+            android:id="@+id/txtEJoined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:paddingRight="@dimen/activity_horizontal_margin" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Địa điểm: "
+            android:textColor="@color/title" />
+
+        <TextView
+            android:id="@+id/txtEDistrict"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -71,16 +72,18 @@
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Người tạo: " />
+            android:text="Người tạo: "
+            android:textColor="@color/title" />
 
         <TextView
             android:id="@+id/txtEcreator"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="3"
+            android:textColor="@android:color/holo_blue_dark" />
 
     </LinearLayout>
 
@@ -91,21 +94,25 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Thời gian: " />
+            android:text="Thời gian: "
+            android:textColor="@color/title" />
 
         <TextView
             android:id="@+id/txtETime"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="3" />
     </LinearLayout>
 
     <View
+        android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#333" />
+        android:paddingBottom="5dp"
+        android:background="?android:attr/listDivider" />
+
 
 </LinearLayout>

@@ -8,8 +8,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
 import com.example.askandteach.models.Course;
@@ -25,7 +27,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     public static final String USER_ID = "USER_ID";
     private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse;
-
+    private ImageView avatar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
     private void addControls(){
+        avatar = findViewById(R.id.avatar);
         txtName = findViewById(R.id.txtName);
         txtIntro = findViewById(R.id.txtIntro);
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
@@ -52,7 +55,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     }
 
 
-    private void getProfile(int userId){
+    private void getProfile(final int userId){
         APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
         Call<Profile> call = service.getProfile(userId);
 
@@ -61,12 +64,14 @@ public class ViewProfileActivity extends AppCompatActivity {
             public void onResponse(Call<Profile> call, Response<Profile> response) {
                 String x = String.valueOf(0);
                 Profile profile = response.body();
+
                 txtName.setText(profile.getUsername());
                 txtIntro.setText(profile.getSelfIntroduce());
                 txtPhoneNumber.setText("09345454656");
                 txtBirthDay.setText(profile.getBirthday());
                 txtNumberStudent.setText(profile.getJoinedEvent().toString());
                 txtNumberCourse.setText(profile.getOpenedClass().toString());
+                new AsyncTaskLoadImage(avatar).execute(profile.getProfileImage());
             }
 
             @Override
