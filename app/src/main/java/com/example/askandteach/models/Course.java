@@ -16,7 +16,7 @@ public class Course implements Serializable {
     private Integer id;
     @SerializedName("price")
     @Expose
-    private Double price;
+    private Integer price;
     @SerializedName("uptime")
     @Expose
     private String uptime;
@@ -41,15 +41,30 @@ public class Course implements Serializable {
     @SerializedName("amount_student")
     @Expose
     private Integer amountStudent;
-    @SerializedName("user")
+    @SerializedName("list_student")
     @Expose
-    private User user;
-    @SerializedName("student_list")
-    @Expose
-    private List<String> studentList = null;
+    private List<Object> listStudent = null;
     @SerializedName("class_opened")
     @Expose
     private Integer classOpened;
+    @SerializedName("longitude")
+    @Expose
+    private Double longitude;
+    @SerializedName("latitude")
+    @Expose
+    private Double latitude;
+    @SerializedName("open_time")
+    @Expose
+    private Integer openTime;
+    @SerializedName("deadline_of_registration")
+    @Expose
+    private Double deadlineOfRegistration;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Integer getId() {
         return id;
@@ -59,11 +74,11 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -131,20 +146,12 @@ public class Course implements Serializable {
         this.amountStudent = amountStudent;
     }
 
-    public User getUser() {
-        return user;
+    public List<Object> getListStudent() {
+        return listStudent;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<String> getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(List<String> studentList) {
-        this.studentList = studentList;
+    public void setListStudent(List<Object> listStudent) {
+        this.listStudent = listStudent;
     }
 
     public Integer getClassOpened() {
@@ -153,6 +160,54 @@ public class Course implements Serializable {
 
     public void setClassOpened(Integer classOpened) {
         this.classOpened = classOpened;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Integer getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Integer openTime) {
+        this.openTime = openTime;
+    }
+
+    public Double getDeadlineOfRegistration() {
+        return deadlineOfRegistration;
+    }
+
+    public void setDeadlineOfRegistration(Double deadlineOfRegistration) {
+        this.deadlineOfRegistration = deadlineOfRegistration;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
