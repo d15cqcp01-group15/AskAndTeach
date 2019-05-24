@@ -16,7 +16,7 @@ public class Course implements Serializable {
     private Integer id;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Float price;
     @SerializedName("uptime")
     @Expose
     private String uptime;
@@ -43,19 +43,19 @@ public class Course implements Serializable {
     private Integer amountStudent;
     @SerializedName("list_student")
     @Expose
-    private List<Object> listStudent = null;
+    private List<String> listStudent = null;
     @SerializedName("class_opened")
     @Expose
     private Integer classOpened;
     @SerializedName("longitude")
     @Expose
-    private Double longitude;
+    private Object longitude;
     @SerializedName("latitude")
     @Expose
-    private Double latitude;
+    private Object latitude;
     @SerializedName("open_time")
     @Expose
-    private Integer openTime;
+    private Object openTime;
     @SerializedName("deadline_of_registration")
     @Expose
     private Double deadlineOfRegistration;
@@ -74,11 +74,11 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -146,11 +146,11 @@ public class Course implements Serializable {
         this.amountStudent = amountStudent;
     }
 
-    public List<Object> getListStudent() {
+    public List<String> getListStudent() {
         return listStudent;
     }
 
-    public void setListStudent(List<Object> listStudent) {
+    public void setListStudent(List<String> listStudent) {
         this.listStudent = listStudent;
     }
 
@@ -162,27 +162,27 @@ public class Course implements Serializable {
         this.classOpened = classOpened;
     }
 
-    public Double getLongitude() {
+    public Object getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude) {
+    public void setLongitude(Object longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude() {
+    public Object getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude) {
+    public void setLatitude(Object latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getOpenTime() {
+    public Object getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Integer openTime) {
+    public void setOpenTime(Object openTime) {
         this.openTime = openTime;
     }
 
