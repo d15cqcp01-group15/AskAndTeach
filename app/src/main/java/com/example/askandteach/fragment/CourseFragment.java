@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.askandteach.Authentication;
 import com.example.askandteach.ItemClickListener;
@@ -135,10 +136,12 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         call.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+
+                ArrayList<Course> unfilter = (ArrayList<Course>) response.body();
                 originalCourses.clear();
 
-                if (response.body() !=null) {
-                    for (Course course : response.body()) {
+                if (unfilter !=null) {
+                    for (Course course : unfilter) {
                         if (course.getStatus().equals("openning")) {
                             originalCourses.add(course);
 
@@ -149,10 +152,14 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
                     filterCourse.addAll(originalCourses);
                     mAdapter.notifyDataSetChanged();
                 }
+                filterCourse.addAll(originalCourses);
+                mAdapter.notifyDataSetChanged();
+
             }
 
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
+                Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT);
             }
         });
 
