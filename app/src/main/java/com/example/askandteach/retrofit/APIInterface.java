@@ -1,5 +1,6 @@
 package com.example.askandteach.retrofit;
 
+import com.example.askandteach.models.CloseCourseMessage;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.CourseDetail;
 import com.example.askandteach.models.CreateCourse;
@@ -20,6 +21,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -28,6 +30,9 @@ public interface APIInterface {
 
     @GET("/courses")
     Call<List<Course>> doGetCourses();
+
+    @GET("/user_course")
+    Call<List<Course>> doGetOwnCourses(@Header("Authorization") String token);
 
     @GET("/events")
     Call<List<Event>> doGetEvents();
@@ -55,6 +60,10 @@ public interface APIInterface {
 
     @GET("/courses/{course_id}")
     Call<CourseDetail> getCourse(@Path("course_id") int course_id);
+
+    @PUT("/close_course")
+    Call<CloseCourseMessage> closeCourse(@Header("Authorization") String token, @Query("course_id") Integer course_id);
+
 
 //    @FormUrlEncoded
 //    @POST("/api/users?")
