@@ -43,25 +43,28 @@ public class Course implements Serializable {
     private Integer amountStudent;
     @SerializedName("list_student")
     @Expose
-    private List<String> listStudent = null;
+    private List<Object> listStudent = null;
     @SerializedName("class_opened")
     @Expose
     private Integer classOpened;
     @SerializedName("longitude")
     @Expose
-    private Object longitude;
+    private Double longitude;
     @SerializedName("latitude")
     @Expose
-    private Object latitude;
+    private Double latitude;
     @SerializedName("open_time")
     @Expose
-    private Object openTime;
+    private Float openTime;
     @SerializedName("deadline_of_registration")
     @Expose
     private Double deadlineOfRegistration;
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("state")
+    @Expose
+    private Boolean state;
     @SerializedName("user")
     @Expose
     private User user;
@@ -146,11 +149,11 @@ public class Course implements Serializable {
         this.amountStudent = amountStudent;
     }
 
-    public List<String> getListStudent() {
+    public List<Object> getListStudent() {
         return listStudent;
     }
 
-    public void setListStudent(List<String> listStudent) {
+    public void setListStudent(List<Object> listStudent) {
         this.listStudent = listStudent;
     }
 
@@ -162,27 +165,27 @@ public class Course implements Serializable {
         this.classOpened = classOpened;
     }
 
-    public Object getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Object longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public Object getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Object latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Object getOpenTime() {
+    public Float getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Object openTime) {
+    public void setOpenTime(Float openTime) {
         this.openTime = openTime;
     }
 
@@ -202,6 +205,14 @@ public class Course implements Serializable {
         this.status = status;
     }
 
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
+    }
+
     public User getUser() {
         return user;
     }
@@ -209,5 +220,4 @@ public class Course implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

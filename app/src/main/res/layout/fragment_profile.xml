@@ -141,6 +141,22 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/txtViewCourses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lý khoá học"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/txtViewEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lý sự kiện"
+                android:textColor="@color/colorPrimary" />
+
             <Button
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"

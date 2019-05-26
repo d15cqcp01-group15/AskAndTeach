@@ -19,8 +19,8 @@ import com.example.askandteach.ItemClickListener;
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
 import com.example.askandteach.adapter.CoursesAdapter;
-import com.example.askandteach.courseDetail.CourseDetailActivity;
-import com.example.askandteach.createCourse.CreateCourseActivity;
+import com.example.askandteach.course.CourseDetailActivity;
+import com.example.askandteach.course.CreateCourseActivity;
 import com.example.askandteach.adapter.CustomSpinnerAdapter;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.retrofit.APIInterface;
@@ -102,7 +102,7 @@ public class CourseFragment extends FragmentFactory implements OnClickListener {
         mAdapter.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(int position) {
-                CourseDetailActivity.startCourseDetail(getActivity(), originalCourses.get(position).getId());
+                CourseDetailActivity.startCourseDetail(getActivity(), filterCourse.get(position).getId());
             }
         });
 

@@ -35,6 +35,7 @@ import com.example.askandteach.
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
 import com.example.askandteach.adapter.EventsAdapter;
+import com.example.askandteach.course.CourseManage;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.Event;
 import com.example.askandteach.models.Profile;
@@ -56,7 +57,7 @@ public class ProfileFragment extends FragmentFactory {
     private boolean done_load_profile;
     final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
-    private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse;
+    private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse, txtCourseManagement;
     private ImageView avatar;
     public ProfileFragment() {
         // Required empty public constructor
@@ -91,7 +92,10 @@ public class ProfileFragment extends FragmentFactory {
         txtBirthDay = view.findViewById(R.id.txtBirthDay);
         txtNumberStudent = view.findViewById(R.id.txtNumberStudent);
         txtNumberCourse = view.findViewById(R.id.txtNumberCourse);
+        txtCourseManagement = view.findViewById(R.id.txtViewCourses);
         avatar = view.findViewById(R.id.avatar);
+        avatar.getLayoutParams().height = 200;
+        avatar.getLayoutParams().width = 200;
     }
 
 
@@ -135,6 +139,13 @@ public class ProfileFragment extends FragmentFactory {
                     dialog.show();
                 }
                 startActivity(callIntent);
+            }
+        });
+
+        txtCourseManagement.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CourseManage.startCourseManageMent(getContext());
             }
         });
     }

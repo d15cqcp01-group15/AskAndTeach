@@ -1,10 +1,19 @@
 package com.example.askandteach.profile;
 
+import android.Manifest;
+import android.Manifest.permission;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +37,8 @@ public class ViewProfileActivity extends AppCompatActivity {
     public static final String USER_ID = "USER_ID";
     private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse;
     private ImageView avatar;
+    final int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,12 +57,45 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     private void addControls(){
         avatar = findViewById(R.id.avatar);
+        avatar.getLayoutParams().height = 200;
+        avatar.getLayoutParams().width = 200;
         txtName = findViewById(R.id.txtName);
         txtIntro = findViewById(R.id.txtIntro);
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
         txtBirthDay = findViewById(R.id.txtBirthDay);
         txtNumberStudent = findViewById(R.id.txtNumberStudent);
         txtNumberCourse = findViewById(R.id.txtNumberCourse);
+
+        txtPhoneNumber.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phonenumber = txtPhoneNumber.getText().toString();
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phonenumber));
+
+
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setPositiveButton("oK", new DialogInterface.OnClickListener() {
+                        @RequiresApi(api = VERSION_CODES.M)
+                        public void onClick(DialogInterface dialog, int id) {
+                            requestPermissions(new String[] {permission.CALL_PHONE},
+                                    REQUEST_CODE_ASK_PERMISSIONS);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            return;
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                startActivity(callIntent);
+            }
+        });
     }
 
 
