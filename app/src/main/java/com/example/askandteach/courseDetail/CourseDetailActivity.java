@@ -1,7 +1,11 @@
 package com.example.askandteach.courseDetail;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,7 +41,7 @@ import retrofit2.Response;
 
 public class CourseDetailActivity extends AppCompatActivity {
 
-    TextView tvName, price, time, skill, district, city, description, tvNumberStudent;
+    TextView tvName, price, time, skill, district, city, description, tvNumberStudent, txtPhoneNumber;
     Button btnRegisterCourse;
     ArrayList<User> registerStudents = new ArrayList<>();
     CourseDetail course;
@@ -67,6 +71,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         description = findViewById(R.id.tvDescriptionClassDetail);
         tvNumberStudent = findViewById(R.id.txtNumberStudent);
         btnRegisterCourse = findViewById(R.id.btnRegisterCourse);
+        txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
 
         recRegisterStudent = findViewById(R.id.recRegisterStudent);
         registerStAdapter = new RegisterStudentAdapter(this, this.registerStudents);
@@ -74,6 +79,20 @@ public class CourseDetailActivity extends AppCompatActivity {
         recRegisterStudent.setLayoutManager(mLayoutManager);
         recRegisterStudent.setAdapter(registerStAdapter);
 
+        txtPhoneNumber.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phonenumber = txtPhoneNumber.getText().toString();
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+phonenumber));
+
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                startActivity(callIntent);
+            }
+        });
 
         avatar = findViewById(R.id.ivCourse);
 
@@ -82,7 +101,6 @@ public class CourseDetailActivity extends AppCompatActivity {
         int user_id = MainActivity.getUser_id();
         if(user_id == 0){
             btnRegisterCourse.setVisibility(View.INVISIBLE);
-
         }
         else{
             getCourse(course_id);
