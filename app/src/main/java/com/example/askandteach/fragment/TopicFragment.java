@@ -13,7 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.askandteach.Authentication;
+import com.example.askandteach.EventDetail.EventDetail;
+import com.example.askandteach.ItemClickListener;
+import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
+import com.example.askandteach.TopicDetail.TopicDetail;
+import com.example.askandteach.adapter.CoursesAdapter;
 import com.example.askandteach.adapter.TopicAdapter;
 import com.example.askandteach.adapter.CustomSpinnerAdapter;
 import com.example.askandteach.models.Topic;
@@ -41,7 +47,7 @@ import retrofit2.Response;
 public class TopicFragment extends FragmentFactory implements OnClickListener {
     private RecyclerView recyclerView;
     private TopicAdapter mAdapter;
-    List<Topic> topics = new ArrayList<>();
+    List<Topic> originalTopics = new ArrayList<>();
 
     private TextView tvSkill;
     private Spinner skill;
@@ -62,46 +68,44 @@ public class TopicFragment extends FragmentFactory implements OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        loadTopics();
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_topic, container, false);
+        View view = inflater.inflate(R.layout.fragment_topic, container, false);
+        addControls(view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.topicRecycleView);
-        mAdapter = new TopicAdapter(topics);
-        addControls(view);
-        addEvents();
+        loadTopics();
+        addTopics();
 
-        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
-        Call<List<Topic>> call = service.doTopic();
-
-        call.enqueue(new Callback<List<Topic>>() {
-            @Override
-            public void onResponse(Call<List<Topic>> call, Response<List<Topic>> response) {
-                topics.clear();
-                topics.addAll(response.body());
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Topic>> call, Throwable t) {
-
-            }
-        });
     }
 
-    private void addEvents(){
+    private void addTopics(){
+
         tvSkill.setOnClickListener(this);
+
+        mAdapter.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                TopicDetail.start(getActivity(), originalTopics.get(position));
+            }
+        });
+
+
     }
 
     private void addControls(View view){
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
-
         tvSkill= view.findViewById(R.id.tvSkill);
         skill = (Spinner) view.findViewById(R.id.cbCSkills);
         List<String> skills = Arrays.asList(getContext().getResources().getStringArray(R.array.skills));
@@ -113,7 +117,11 @@ public class TopicFragment extends FragmentFactory implements OnClickListener {
                 tvSkill.setText(text);
             }
         });
-        skill.setAdapter(skillAdapter);
+        recyclerView = (RecyclerView) view.findViewById(R.id.topicRecycleView);
+        mAdapter = new TopicAdapter(getActivity(), originalTopics);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void hideSpinner(Spinner sp){
@@ -132,6 +140,25 @@ public class TopicFragment extends FragmentFactory implements OnClickListener {
         if (v == tvSkill){
             skill.performClick();
         }
+    }
+
+    private void loadTopics(){
+        APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
+        Call<List<Topic>> call = service.doTopic();
+
+        call.enqueue(new Callback<List<Topic>>() {
+            @Override
+            public void onResponse(Call<List<Topic>> call, Response<List<Topic>> response) {
+                originalTopics.clear();
+                originalTopics.addAll(response.body());
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Topic>> call, Throwable t) {
+
+            }
+        });
     }
 
 

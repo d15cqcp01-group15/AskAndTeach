@@ -14,6 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".TopicDetail.TopicDetail"
+            android:label="@string/title_activity_topic_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".fragment.TopicDeatail"
+            android:label="@string/title_activity_topic_deatail"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Authentication" />
         <activity android:name=".EventDetail.EventDetail" />
         <activity android:name=".createCourse.CreateCourseActivity" />

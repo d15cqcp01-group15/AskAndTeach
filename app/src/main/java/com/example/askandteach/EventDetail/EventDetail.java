@@ -1,24 +1,24 @@
 package com.example.askandteach.EventDetail;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.view.View.OnClickListener;
+        import android.widget.Button;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import com.example.askandteach.AsyncTaskLoadImage;
-import com.example.askandteach.R;
-import com.example.askandteach.createCourse.CreateCourseActivity;
-import com.example.askandteach.models.Course;
-import com.example.askandteach.models.Event;
-import com.example.askandteach.profile.ViewProfileActivity;
-import com.example.askandteach.utils;
+        import com.example.askandteach.AsyncTaskLoadImage;
+        import com.example.askandteach.R;
+        import com.example.askandteach.createCourse.CreateCourseActivity;
+        import com.example.askandteach.models.Course;
+        import com.example.askandteach.models.Event;
+        import com.example.askandteach.profile.ViewProfileActivity;
+        import com.example.askandteach.utils;
 
-import java.io.Serializable;
+        import java.io.Serializable;
 
 public class EventDetail extends AppCompatActivity {
 
