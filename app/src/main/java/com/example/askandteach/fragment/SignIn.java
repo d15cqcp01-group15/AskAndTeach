@@ -74,6 +74,16 @@ public class SignIn extends FragmentFactory {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    public void showToast(String textContent){
+        Context context = getActivity().getApplicationContext();
+        CharSequence text = textContent;
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+    }
+
+
     private void addEvents(){
         btnSignin.setOnClickListener(new OnClickListener() {
             @Override
@@ -96,11 +106,13 @@ public class SignIn extends FragmentFactory {
                     MainActivity.setTokenValue(token_value);
                     MainActivity.setUser_id(user_id);
                     getActivity().onBackPressed();
+                    showToast("Đăng nhập thành công !");
 
                 }
 
                 @Override
                 public void onFailure(Call<SignInresponse> call, Throwable t) {
+                    showToast("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin đăng nhập !");
                 }
             });
             }
