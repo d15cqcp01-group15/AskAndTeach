@@ -62,7 +62,7 @@ public class EventDetail extends AppCompatActivity {
         txtTopicname.setText(ev.getTitle());
         tvCreator.setText(ev.getUser().getUsername());
         txtAddress.setText(ev.getAddress().toString());
-        txtTime.setText(utils.timestampToDatestring(ev.getOpen_time()));
+        txtTime.setText(utils.timestampToDatestring(ev.getOpenTime()));
         txtDescripton.setText(ev.getDescription());
         txtJoined.setText(ev.getAmountStudent().toString());
         txtPrice.setText(ev.getPrice().toString());

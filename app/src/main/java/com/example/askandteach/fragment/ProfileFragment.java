@@ -1,10 +1,19 @@
 package com.example.askandteach.fragment;
 
+import android.Manifest;
+import android.Manifest.permission;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.askandteach.AsyncTaskLoadImage;
 import com.example.askandteach.Authentication;
@@ -44,7 +54,7 @@ public class ProfileFragment extends FragmentFactory {
     private Profile profile;
     private Button logout;
     private boolean done_load_profile;
-
+    final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     private TextView txtName, txtIntro, txtPhoneNumber, txtBirthDay, txtNumberStudent, txtNumberCourse;
     private ImageView avatar;
@@ -97,7 +107,38 @@ public class ProfileFragment extends FragmentFactory {
                 getActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit();
             }
         });
+
+        txtPhoneNumber.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phonenumber = txtPhoneNumber.getText().toString();
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phonenumber));
+
+
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setPositiveButton("oK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            requestPermissions(new String[] {permission.CALL_PHONE},
+                                    REQUEST_CODE_ASK_PERMISSIONS);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            return;
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                startActivity(callIntent);
+            }
+        });
     }
+
 
     private void getProfile(){
         APIInterface service = RetrofitInstance.getRetrofitInstance().create(APIInterface.class);
