@@ -29,21 +29,19 @@ public class Event implements Serializable {
     private String uptime;
     @SerializedName("price")
     @Expose
-    private Double price;
-    @SerializedName("amount_student")
-    @Expose
-    private Integer amountStudent;
-    @SerializedName("user")
-    @Expose
-    private User user;
-
-    @SerializedName("open_time")
-    @Expose
-    private Long open_time;
-
+    private Float price;
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("amount_student")
+    @Expose
+    private Integer amountStudent;
+    @SerializedName("open_time")
+    @Expose
+    private Float openTime;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Integer getId() {
         return id;
@@ -93,12 +91,20 @@ public class Event implements Serializable {
         this.uptime = uptime;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getAmountStudent() {
@@ -109,28 +115,19 @@ public class Event implements Serializable {
         this.amountStudent = amountStudent;
     }
 
+    public Float getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Float openTime) {
+        this.openTime = openTime;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-
-    public Long getOpen_time() {
-        return open_time;
-    }
-
-    public void setOpen_time(Long open_time) {
-        this.open_time = open_time;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.askandteach.Authentication;
 import com.example.askandteach.EventDetail.EventDetail;
@@ -213,7 +214,7 @@ public class EventFragment extends FragmentFactory implements OnClickListener{
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Khong the get events", Toast.LENGTH_SHORT);
             }
         });
 
