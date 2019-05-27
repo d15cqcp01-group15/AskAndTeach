@@ -139,7 +139,7 @@ tools:context=".EventDetail.EventDetail">
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Nội : "
+            android:text="Nội dung: "
             android:textColor="@color/title" />
 
         <TextView
