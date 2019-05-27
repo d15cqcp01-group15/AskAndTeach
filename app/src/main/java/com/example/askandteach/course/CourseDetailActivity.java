@@ -3,6 +3,7 @@ package com.example.askandteach.course;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
@@ -94,15 +95,9 @@ public class CourseDetailActivity extends AppCompatActivity {
         avatar.getLayoutParams().height = 200;
         avatar.getLayoutParams().width = 200;
 
-        final int course_id = (int) getIntent().getSerializableExtra("COURSE");
 
-        int user_id = MainActivity.getUser_id();
-        if(user_id == 0){
-            btnRegisterCourse.setVisibility(View.INVISIBLE);
-        }
-        else{
-            getCourse(course_id);
-        }
+        final int course_id = (int) getIntent().getSerializableExtra("COURSE");
+        getCourse(course_id);
 
         tvName.setOnClickListener(new OnClickListener() {
             @Override
@@ -204,6 +199,10 @@ public class CourseDetailActivity extends AppCompatActivity {
 
                 if(registed == true){
                     btnRegisterCourse.setText("Huỹ đăng ký");
+                }
+                int user_id = MainActivity.getUser_id();
+                if(user_id == 0 || user_id == course.getUser().getId()){
+                    btnRegisterCourse.setVisibility(View.INVISIBLE);
                 }
             }
 

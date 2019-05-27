@@ -29,12 +29,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
     private List<Course> courses;
     private ItemClickListener callback;
     private Activity mActivity;
+    private int imgheartBack = R.drawable.filledheart;
+    private int imgheartFront = R.drawable.outline_heart;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, price, time, skill, district, numberRegister;
         public String city;
-        public ImageView avatar;
+        public ImageView avatar, imgHeart;
         public Button btnJoin;
 
 
@@ -47,6 +49,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
             district = (TextView) view.findViewById(R.id.txtdistrict);
             avatar = (ImageView) view.findViewById(R.id.avatar);
             numberRegister = view.findViewById(R.id.txtNumberRegister);
+            imgHeart = view.findViewById(R.id.imgHeart);
+            imgHeart.getLayoutParams().height = 64;
+            imgHeart.getLayoutParams().width =64;
         }
 
     }
@@ -97,6 +102,18 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.MyViewHo
                 ViewProfileActivity.start(mActivity, cl.getUser().getId());
             }
         });
+
+        holder.imgHeart.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int temp = imgheartBack;
+                imgheartBack = imgheartFront;
+                imgheartFront = temp;
+                ImageView iv = v.findViewById(R.id.imgHeart);
+                iv.setImageResource(imgheartFront);
+            }
+        });
+
     }
 
     @Override
