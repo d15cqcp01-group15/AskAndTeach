@@ -92,8 +92,8 @@ public class CourseDetailActivity extends AppCompatActivity {
         });
 
         avatar = findViewById(R.id.ivCourse);
-        avatar.getLayoutParams().height = 200;
-        avatar.getLayoutParams().width = 200;
+        avatar.getLayoutParams().height = 300;
+        avatar.getLayoutParams().width = 300;
 
 
         final int course_id = (int) getIntent().getSerializableExtra("COURSE");
