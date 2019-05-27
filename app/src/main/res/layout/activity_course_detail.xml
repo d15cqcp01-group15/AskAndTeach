@@ -165,7 +165,7 @@
                     android:id="@+id/tvDescriptionClassDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="jlkfjalkdf kdljafkl dlkafjkldfja lfdjkdljfkldjfkdjaflkdjlfajlkdajfk" />
+                    android:text="Loading..." />
             </LinearLayout>
 
             <LinearLayout
