@@ -90,7 +90,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:textColor="@android:color/holo_red_dark" />
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -167,7 +168,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="2dp"
         android:background="@color/year" />
 
 </LinearLayout>
