@@ -93,8 +93,10 @@ public class CourseManage extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 ownCourse.clear();
-                ownCourse.addAll(response.body());
-                ownCouseAdapter.notifyDataSetChanged();
+                if(response.body() != null) {
+                    ownCourse.addAll(response.body());
+                    ownCouseAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

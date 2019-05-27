@@ -16,6 +16,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/txtsss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chi tiết khoá học"
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
+
             <ImageView
                 android:id="@+id/ivCourse"
                 android:layout_width="wrap_content"
@@ -54,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
-                    android:text="Học : "
+                    android:text="Giá: "
                     android:textColor="@color/title" />
 
                 <TextView
@@ -206,7 +214,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recRegisterStudent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="300dp" />
 
             <Button
                 android:id="@+id/btnRegisterCourse"
