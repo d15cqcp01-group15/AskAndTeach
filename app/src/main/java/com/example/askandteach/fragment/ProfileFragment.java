@@ -108,7 +108,9 @@ public class ProfileFragment extends FragmentFactory {
                 preferences.edit().remove("user_id").commit();
                 MainActivity.setTokenValue("");
                 MainActivity.setUser_id(0);
-                getActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit();
+
+                Authentication.start(getContext());
+//                getActivity().getSupportFragmentManager().beginTransaction().remove(ProfileFragment.this).commit();
             }
         });
 
@@ -160,13 +162,15 @@ public class ProfileFragment extends FragmentFactory {
             public void onResponse(Call<Profile> call, Response<Profile> response) {
                 String x = String.valueOf(0);
                 profile = response.body();
-                txtName.setText(profile.getUsername());
-                txtIntro.setText(profile.getSelfIntroduce());
-                txtPhoneNumber.setText("09345454656");
-                txtBirthDay.setText(profile.getBirthday());
-                txtNumberStudent.setText(profile.getJoinedEvent().toString());
-                txtNumberCourse.setText(profile.getOpenedClass().toString());
-                new AsyncTaskLoadImage(avatar).execute(profile.getProfileImage());
+                if(response.body() != null) {
+                    txtName.setText(profile.getUsername());
+                    txtIntro.setText(profile.getSelfIntroduce());
+                    txtPhoneNumber.setText("09345454656");
+                    txtBirthDay.setText(profile.getBirthday());
+                    txtNumberStudent.setText(profile.getJoinedEvent().toString());
+                    txtNumberCourse.setText(profile.getOpenedClass().toString());
+                    new AsyncTaskLoadImage(avatar).execute(profile.getProfileImage());
+                }
             }
 
             @Override

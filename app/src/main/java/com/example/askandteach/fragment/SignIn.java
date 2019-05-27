@@ -1,6 +1,7 @@
 package com.example.askandteach.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Email;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.askandteach.MainActivity;
 import com.example.askandteach.R;
+import com.example.askandteach.course.CourseDetailActivity;
 import com.example.askandteach.models.Course;
 import com.example.askandteach.models.SignInModel;
 import com.example.askandteach.models.SignInresponse;
