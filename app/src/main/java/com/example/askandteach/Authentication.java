@@ -36,13 +36,15 @@ public class Authentication extends AppCompatActivity implements FragmentFactory
         pagerAdapter = new AuthenPagerAdapter(getSupportFragmentManager());
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
-        addTabs();
+        addTabs(tabLayout);
     }
 
-    private void addTabs() {
+    private void addTabs(TabLayout tabLayout) {
         pagerAdapter.addFrag(new SignIn());
         pagerAdapter.addFrag(new SignUp());
         viewPager.setAdapter(pagerAdapter);
+        tabLayout.getTabAt(0).setText("Đăng nhập");
+        tabLayout.getTabAt(1).setText("Đăng ký");
     }
 
     public static void start(Context context) {
